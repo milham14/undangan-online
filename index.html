@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan - Romeo & Juliet</title>
+    <title>Undangan Pernikahan - Ilham & Erni</title>
     <meta name="description" content="Undangan pernikahan eksklusif">
     <!-- Menggunakan font Google premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,13 +11,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body style="overflow: hidden;">
+    <!-- Cover Page (New Golden Vows Reference) -->
+    <div id="cover-page" class="cover-page new-cover">
+        <div class="cover-top-text">
+            <h4>You are invited to our wedding</h4>
+            <h1 class="title-cursive">Ilham & Erni</h1>
+        </div>
+        
+        <div class="cover-bottom-area">
+            <div class="guest-info">
+                <p>Kepada Yth.<br>Bpk/Ibu/Saudara/i</p>
+                <div class="guest-name-box">
+                    <span class="guest-name">Nama Tamu</span>
+                </div>
+                <p>di Tempat</p>
+            </div>
+            
+            <button id="btn-open" class="btn-light-lock">
+                <span class="lock-icon">🔒</span> BUKA UNDANGAN
+            </button>
+        </div>
+    </div>
+
     <!-- Bagian Hero / Cover -->
     <header class="hero section-fade">
         <div class="hero-content glass-card">
-            <h4>The Wedding Of</h4>
-            <h1>Romeo & Juliet</h1>
-            <p>12 . 12 . 2026</p>
+            <h4 style="margin-top: 2rem;">The Wedding Of</h4>
+            <h1>Ilham & Erni</h1>
+            <p>06 . 03 . 2027</p>
+
+            <h2 style="font-size: 2.5rem; color: var(--gold); margin-bottom: 1.5rem;">Save The Date</h2>
+            
+            <!-- Hitung Mundur (Save the date) -->
+            <div class="countdown" id="countdown">
+                <div class="time-box"><span id="days">00</span><p>Hari</p></div>
+                <div class="time-box"><span id="hours">00</span><p>Jam</p></div>
+                <div class="time-box"><span id="minutes">00</span><p>Menit</p></div>
+                <div class="time-box"><span id="seconds">00</span><p>Detik</p></div>
+            </div>
         </div>
     </header>
 
@@ -27,31 +59,135 @@
         <span>- Ar-Rum: 21 -</span>
     </section>
 
+    <!-- Bagian Mempelai (Couple) -->
+    <section class="couple section-fade">
+        <h2>Mempelai</h2>
+        <div class="couple-container">
+            <!-- CPP (Calon Pengantin Pria) -->
+            <div class="couple-card glass-card">
+                <div class="couple-photo">
+                    <img src="images/prewed_1_1772683503431.png" alt="Foto Groom">
+                </div>
+                <h3>Muhammad Ilham</h3>
+                <p class="parents">Putra Ketiga dari<br>Bpk. Eddy Suhanda & Ibu Sri Sumiyati</p>
+                <a href="https://www.instagram.com/milham_14/" class="btn-ig" target="_blank" rel="noopener noreferrer">@milham_14</a>
+            </div>
+
+            <!-- Logo / Ampersand -->
+            <div class="couple-separator">
+                <h1 class="title-cursive" style="color: var(--gold); font-size: 5rem; margin: 0;">&</h1>
+            </div>
+
+            <!-- CPW (Calon Pengantin Wanita) -->
+            <div class="couple-card glass-card">
+                <div class="couple-photo">
+                    <img src="images/prewed_2_1772683520208.png" alt="Foto Bride">
+                </div>
+                <h3>Erni Aryvia Damayanti</h3>
+                <p class="parents">Putri Kedua dari<br>Bpk. Parman & Ibu Purmini</p>
+                <a href="https://www.instagram.com/erniryvia/" class="btn-ig" target="_blank" rel="noopener noreferrer">@erniryvia</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Bagian Detail Acara -->
     <section class="details section-fade">
-        <h2>Save The Date</h2>
         
-        <!-- Hitung Mundur -->
-        <div class="countdown" id="countdown">
-            <div class="time-box"><span id="days">00</span><p>Hari</p></div>
-            <div class="time-box"><span id="hours">00</span><p>Jam</p></div>
-            <div class="time-box"><span id="minutes">00</span><p>Menit</p></div>
-            <div class="time-box"><span id="seconds">00</span><p>Detik</p></div>
-        </div>
-
         <!-- Jadwal Akad & Resepsi -->
         <div class="events">
             <div class="event-card glass-card">
                 <h3>Akad Nikah</h3>
-                <p class="date">Sabtu, 12 Desember 2026</p>
+                <p class="date">Sabtu, 06 Maret 2026</p>
                 <p class="time">08:00 WIB - Selesai</p>
-                <p class="location">Masjid Agung Cirebon<br>Jl. Kenangan No. 1, Cirebon</p>
+                <p class="location">Masjid Agung Bekasi<br>Jl. Kenangan No. 1, Bekasi</p>
             </div>
             <div class="event-card glass-card">
                 <h3>Resepsi</h3>
-                <p class="date">Sabtu, 12 Desember 2026</p>
+                <p class="date">Sabtu, 06 Maret 2026</p>
                 <p class="time">11:00 WIB - 15:00 WIB</p>
-                <p class="location">Gedung Pertemuan Indah<br>Jl. Maju Bersama No. 10, Cirebon</p>
+                <p class="location">Gedung Pertemuan Indah<br>Jl. Maju Bersama No. 10, Bekasi</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bagian Our Story (Alur Pertemuan) -->
+    <section class="story section-fade">
+        <h2>Our Story</h2>
+        <div class="timeline">
+            <div class="timeline-item left">
+                <div class="timeline-content glass-card">
+                    <h3>Pertama Bertemu</h3>
+                    <p class="date">Januari 2024</p>
+                    <p>Kami pertama kali bertemu di sebuah kafe kecil di sudut kota. Berawal dari obrolan sederhana tentang buku, kami merasa ada kecocokan yang unik.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content glass-card">
+                    <h3>Menjalin Kasih</h3>
+                    <p class="date">Juni 2024</p>
+                    <p>Seiring berjalannya waktu, perasaan kami semakin tumbuh. Di bawah rintik hujan sore itu, kami memutuskan untuk memulai lembaran baru bersama.</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="timeline-content glass-card">
+                    <h3>Lamaran</h3>
+                    <p class="date">Desember 2025</p>
+                    <p>Sebuah kejutan manis di hari ulang tahunku. Dia berlutut dan menanyakan satu pertanyaan yang mengubah hidup kami selamanya: "Will you marry me?"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bagian Galeri Prewedding -->
+    <section class="gallery section-fade">
+        <h2>Our Moments</h2>
+        <div class="carousel-container glass-card">
+            <!-- Carousel Slides -->
+            <div class="carousel-track">
+                <div class="carousel-slide active">
+                    <img src="images/prewed_1_1772683503431.png" alt="Prewedding 1">
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/prewed_2_1772683520208.png" alt="Prewedding 2">
+                </div>
+                <div class="carousel-slide">
+                    <img src="images/prewed_3_1772683631493.png" alt="Prewedding 3">
+                </div>
+                <!-- You can add more slides here -->
+            </div>
+            
+            <!-- Navigation Buttons -->
+            <button class="carousel-btn prev-btn" aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next-btn" aria-label="Next image">&#10095;</button>
+
+            <!-- Navigation Dots -->
+            <div class="carousel-dots">
+                <span class="dot active" onclick="currentSlide(0)"></span>
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bagian Wedding Gift (Amplop Digital / Bank) -->
+    <section class="gift section-fade">
+        <h2>Wedding Gift</h2>
+        <p>Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Anda bermaksud memberikan tanda kasih, Anda dapat mengirimkannya melalui:</p>
+        <div class="bank-cards">
+            <!-- Bank BCA -->
+            <div class="bank-card bca-card glass-card">
+                <img src="images/BCA.png" alt="Logo BCA" class="bank-logo">
+                <p class="account-number" id="norek-bca">0941384551</p>
+                <p class="account-name">a.n. Muhammad Ilham</p>
+                <button class="btn-copy" onclick="copyToClipboard('norek-bca')">Salin No. Rekening</button>
+            </div>
+
+            <!-- Bank Mandiri -->
+            <div class="bank-card mandiri-card glass-card">
+                <img src="images/BCA.png" alt="Logo BCA" class="bank-logo">
+                <p class="account-number" id="norek-mandiri">7635571951</p>
+                <p class="account-name">a.n. Erni Aryvia Damayanti</p>
+                <button class="btn-copy" onclick="copyToClipboard('norek-bca')">Salin No. Rekening</button>
             </div>
         </div>
     </section>
@@ -80,12 +216,26 @@
             </div>
             <button type="submit" class="btn-primary">Kirim Konfirmasi</button>
         </form>
+
+        <!-- Tempat Menampilkan Pesan -->
+        <div class="messages-container glass-card hidden" id="messages-container">
+            <h3>Pesan dari Teman & Keluarga</h3>
+            <div class="message-list" id="message-list">
+                <!-- Pesan akan dimunculkan di sini via JS -->
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>Created with ♥ for Romeo & Juliet</p>
+        <p>Created By @milham_14</p>
     </footer>
+
+    <!-- Audio Player (Background Music) -->
+    <audio id="bg-music" loop>
+        <source src="NatKingCole-Love.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
 
     <script src="script.js"></script>
 </body>

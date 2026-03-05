@@ -1,4 +1,79 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // 0. Cover Page & Background Music Logic
+    const btnOpen = document.getElementById('btn-open');
+    const coverPage = document.getElementById('cover-page');
+    const bgMusic = document.getElementById('bg-music');
+
+    /* --- Notifikasi Salin --- */
+    const toast = document.getElementById('toast');
+    function showToast(message) {
+        toast.querySelector('.toast-message').textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+    // Make global for inline onclick
+    window.showToast = showToast;
+
+    /* --- Gallery Carousel --- */
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const nextButton = document.querySelector('.next-btn');
+    const prevButton = document.querySelector('.prev-btn');
+    const dotsNav = document.querySelector('.carousel-dots');
+    const dots = Array.from(dotsNav.children);
+
+    let currentSlideIndex = 0;
+
+    const updateCarousel = (index) => {
+        // Geser track ke slide yang sesuai
+        track.style.transform = `translateX(-${index * 100}%)`;
+
+        // Update class active pada dot indicator
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index].classList.add('active');
+
+        // Update variable current index
+        currentSlideIndex = index;
+    };
+
+    // Klik tombol Next
+    nextButton.addEventListener('click', () => {
+        let nextIndex = currentSlideIndex + 1;
+        if (nextIndex >= slides.length) {
+            nextIndex = 0; // Balik ke awal kalau sudah mentok
+        }
+        updateCarousel(nextIndex);
+    });
+
+    // Klik tombol Prev
+    prevButton.addEventListener('click', () => {
+        let prevIndex = currentSlideIndex - 1;
+        if (prevIndex < 0) {
+            prevIndex = slides.length - 1; // Ke gambar terakhir kalau di awal
+        }
+        updateCarousel(prevIndex);
+    });
+
+    // Fungsi untuk dipakai di attribut `onclick` di HTML
+    window.currentSlide = (index) => {
+        updateCarousel(index);
+    };
+
+    btnOpen.addEventListener('click', () => {
+        // Hilangkan cover page
+        coverPage.classList.add('hidden');
+
+        // Kembalikan fungsi scroll pada halaman
+        document.body.style.overflow = 'auto';
+
+        // Mainkan background music (lagu)
+        bgMusic.play().catch(error => {
+            console.log("Autoplay background music ditahan oleh browser. Pengguna harus berinteraksi dengan dokumen terlebih dahulu.", error);
+        });
+    });
+
     // 1. Intersection Observer untuk Animasi Scroll (Fade In)
     const observerOptions = {
         root: null,
@@ -21,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 2. Countdown Timer (Hitung Mundur)
     // Atur tanggal pernikahan di sini!
-    const targetDate = new Date("Dec 12, 2026 08:00:00").getTime();
+    const targetDate = new Date("Mar 06, 2027 08:00:00").getTime();
 
     const updateCountdown = () => {
         const now = new Date().getTime();
@@ -47,20 +122,72 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // 3. Form RSVP Submit Handling
+    // 3. Form RSVP & Menampilkan Pesan
     const rsvpForm = document.getElementById('rsvp-form');
+    const messagesContainer = document.getElementById('messages-container');
+    const messageList = document.getElementById('message-list');
+
+    // Simpanan data sementara
+    let messages = [];
+
+    // Fungsi Render Pesan 
+    const renderMessages = () => {
+        if (messages.length === 0) {
+            messagesContainer.classList.add('hidden');
+            return;
+        }
+        messagesContainer.classList.remove('hidden');
+        messageList.innerHTML = '';
+
+        messages.slice().reverse().forEach(msg => {
+            const statusBadge = msg.attendance === 'yes'
+                ? '<span class="badge hadir">Hadir</span>'
+                : '<span class="badge absen">Tidak Hadir</span>';
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message-item';
+            msgDiv.innerHTML = `
+                <h4>${msg.name}</h4>
+                ${statusBadge}
+                <p>"${msg.message}"</p>
+            `;
+            messageList.appendChild(msgDiv);
+        });
+    };
+
     rsvpForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         const name = document.getElementById('name').value;
         const attendance = document.getElementById('attendance').value;
         const message = document.getElementById('message').value;
 
-        // Tampilkan notifikasi konfirmasi sederhana (Bisa diintegrasikan dengan WhatsApp / Google Form nantinya)
+        // Tampilkan notifikasi konfirmasi sederhana
         const statusHadir = attendance === 'yes' ? 'Hadir 🎉' : 'Tidak Hadir 🙏';
-        alert(`Terima kasih, ${name} atas konfirmasinya!\n\nStatus: ${statusHadir}\nPesan: ${message}`);
-        
+        alert(`Terima kasih, ${name} atas konfirmasinya!\n\nStatus: ${statusHadir}`);
+
+        if (message.trim() !== '') {
+            // Tambahkan ke Array
+            messages.push({
+                name, attendance, message
+            });
+            renderMessages();
+        }
+
         // Reset formulir
         rsvpForm.reset();
     });
+
+    // Panggil render awal
+    renderMessages();
 });
+
+// Copy to Clipboard (Global Scope)
+window.copyToClipboard = function (elementId) {
+    const textToCopy = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert('Nomor rekening berhasil disalin!');
+    }).catch(err => {
+        console.error('Gagal menyalin text: ', err);
+    });
+};
