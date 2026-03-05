@@ -1,0 +1,297 @@
+/* Variabel Warna & Font Premium */
+:root {
+    --primary-color: #8A9A5B; /* Sage Green */
+    --secondary-color: #FDFBF7; /* Floral White/Cream */
+    --text-main: #333333;
+    --text-light: #555555;
+    --gold: #D4AF37;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Outfit', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--secondary-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+}
+
+/* Utilitas Efek Kaca (Glassmorphism) */
+.glass-card {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Animasi Muncul saat Scroll */
+.section-fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-out;
+}
+.section-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Hero Section (Cover) --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* Background romantis dengan overlay gelap */
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+    color: white;
+}
+
+.hero-content {
+    padding: 3rem 4rem;
+    animation: fadeInDown 1.5s ease-out forwards;
+}
+
+.hero h4 {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: var(--gold);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    letter-spacing: 5px;
+}
+
+/* --- Quote Section --- */
+.quote {
+    padding: 5rem 2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.quote p {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.quote span {
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+/* --- Details Section (Jadwal & Countdown) --- */
+.details {
+    padding: 5rem 2rem;
+    background: linear-gradient(to bottom, var(--secondary-color), #f0ede6);
+    text-align: center;
+}
+
+.details h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 3rem;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+}
+
+.time-box {
+    background: var(--primary-color);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    min-width: 100px;
+    box-shadow: 0 10px 20px rgba(138, 154, 91, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.time-box:hover {
+    transform: translateY(-5px);
+}
+
+.time-box span {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.time-box p {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.events {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.event-card {
+    padding: 3rem 2rem;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-10px);
+}
+
+.event-card h3 {
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+}
+
+.event-card .date {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.event-card .time {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.event-card .location {
+    color: var(--text-light);
+}
+
+/* --- RSVP Section --- */
+.rsvp {
+    padding: 5rem 2rem;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.rsvp h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.rsvp p {
+    margin-bottom: 3rem;
+    color: var(--text-light);
+}
+
+#rsvp-form {
+    padding: 2.5rem;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(138, 154, 91, 0.3);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    background: rgba(255,255,255,0.7);
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.btn-primary {
+    display: inline-block;
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: #76854d;
+    transform: scale(1.02);
+}
+
+/* --- Footer --- */
+.footer {
+    padding: 2rem;
+    text-align: center;
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Keyframes Animasi */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tampilan Responsif (Mobile) */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 3rem; }
+    .hero-content { padding: 2rem; margin: 1rem; }
+    .countdown { gap: 1rem; }
+    .time-box { min-width: 80px; padding: 1rem; }
+    .time-box span { font-size: 2rem; }
+}
