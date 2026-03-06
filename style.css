@@ -952,29 +952,62 @@ h4 {
     }
 
     /* Layout Timeline Mobile (Our Story) */
+    .timeline {
+        max-width: 100%;
+        padding: 0 8px;
+    }
+
+    /* Garis tengah tetap di tengah */
     .timeline::after {
-        left: 31px;
+        left: 50%;
     }
 
+    /* Item kiri & kanan tetap 50% */
     .timeline-item {
-        width: 100%;
-        padding-left: 70px;
-        padding-right: 15px;
-        /* Kurangi padding kanan di HP */
+        width: 50%;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
-    .timeline-item::after {
-        left: 23px;
-    }
-
-    .right {
+    .timeline-item.left {
         left: 0;
+        padding-left: 12px;
+        padding-right: 28px;
     }
 
-    .timeline-item.left::after,
+    .timeline-item.right {
+        left: 50%;
+        padding-left: 28px;
+        padding-right: 12px;
+    }
+
+    /* Bulatan connector tetap di posisi masing-masing */
+    .timeline-item.left::after {
+        right: -8px;
+        left: unset;
+    }
+
     .timeline-item.right::after {
-        left: 23px;
-        /* Posisi bulatan disamakan kiri semua */
+        left: -8px;
+        right: unset;
+    }
+
+    /* Konten card lebih compact di mobile */
+    .timeline-content {
+        padding: 1rem 0.8rem;
+    }
+
+    .timeline-content h3 {
+        font-size: 1rem;
+    }
+
+    .timeline-content p {
+        font-size: 0.82rem;
+        line-height: 1.5;
+    }
+
+    .timeline-content .date {
+        font-size: 0.78rem;
     }
 
     /* Couple Section Mobile */
