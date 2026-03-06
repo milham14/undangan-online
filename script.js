@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ============================================================
     // 0. NAMA TAMU DARI URL PARAMETER
-    // Contoh link: index.html?tamu=Budi+Santoso
     // ============================================================
     const urlParams = new URLSearchParams(window.location.search);
     const namaParam = urlParams.get('tamu');
@@ -25,27 +24,56 @@ document.addEventListener("DOMContentLoaded", () => {
     // ============================================================
     // 1. COVER PAGE & BACKGROUND MUSIC
     // ============================================================
-    const btnOpen = document.getElementById('btn-open');
-    const coverPage = document.getElementById('cover-page');
-    const bgMusic = document.getElementById('bg-music');
+    const btnOpen     = document.getElementById('btn-open');
+    const coverPage   = document.getElementById('cover-page');
+    const bgMusic     = document.getElementById('bg-music');
+    const floatingNav = document.getElementById('floating-nav');
+    const btnMusic    = document.getElementById('btn-music');
 
     btnOpen.addEventListener('click', () => {
         coverPage.classList.add('hidden');
         document.body.style.overflow = 'auto';
+
+        // Tampilkan floating nav
+        floatingNav.classList.add('visible');
+
+        // Mainkan musik
         bgMusic.play().catch(err => {
             console.log("Autoplay ditahan browser:", err);
         });
     });
 
+    // --- Toggle Musik ---
+    btnMusic.addEventListener('click', () => {
+        if (bgMusic.paused) {
+            bgMusic.play();
+        } else {
+            bgMusic.pause();
+        }
+    });
+
+    // Sinkronisasi ikon dengan state musik
+    bgMusic.addEventListener('play', () => {
+        btnMusic.querySelector('.nav-icon').textContent = '⏸️';
+        btnMusic.classList.add('playing');
+        btnMusic.title = 'Pause Musik';
+    });
+
+    bgMusic.addEventListener('pause', () => {
+        btnMusic.querySelector('.nav-icon').textContent = '🎵';
+        btnMusic.classList.remove('playing');
+        btnMusic.title = 'Play Musik';
+    });
+
     // ============================================================
     // 2. GALLERY CAROUSEL
     // ============================================================
-    const track = document.querySelector('.carousel-track');
-    const slides = Array.from(track.children);
+    const track     = document.querySelector('.carousel-track');
+    const slides    = Array.from(track.children);
     const nextButton = document.querySelector('.next-btn');
     const prevButton = document.querySelector('.prev-btn');
-    const dotsNav = document.querySelector('.carousel-dots');
-    const dots = Array.from(dotsNav.children);
+    const dotsNav   = document.querySelector('.carousel-dots');
+    const dots      = Array.from(dotsNav.children);
 
     let currentSlideIndex = 0;
 
@@ -76,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const targetDate = new Date("Mar 06, 2027 08:00:00").getTime();
 
     const updateCountdown = () => {
-        const now = new Date().getTime();
+        const now      = new Date().getTime();
         const distance = targetDate - now;
 
         if (distance < 0) {
@@ -106,14 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const messageList       = document.getElementById('message-list');
     const submitBtn         = rsvpForm.querySelector('button[type="submit"]');
 
-    // --- Render pesan ke DOM ---
     const renderMessages = (messages) => {
-        if (!messages || messages.length === 0) {
-            messagesContainer.classList.add('hidden');
-            return;
-        }
-
-        const filtered = messages.filter(msg => msg.pesan && msg.pesan.trim() !== '');
+        const filtered = (messages || []).filter(msg => msg.pesan && msg.pesan.trim() !== '');
         if (filtered.length === 0) {
             messagesContainer.classList.add('hidden');
             return;
@@ -138,30 +160,25 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    // --- Load pesan dari Google Sheets ---
     const loadMessages = async () => {
         try {
             const res  = await fetch(`${APPS_SCRIPT_URL}?action=getMessages`);
             const data = await res.json();
-            if (data.status === 'success') {
-                renderMessages(data.messages);
-            }
+            if (data.status === 'success') renderMessages(data.messages);
         } catch (err) {
             console.error('Gagal memuat pesan:', err);
         }
     };
 
-    // Load pesan saat halaman pertama dibuka
     loadMessages();
 
-    // --- Submit RSVP ---
     rsvpForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const nama       = document.getElementById('name').value.trim();
+        const nama      = document.getElementById('name').value.trim();
         const attendance = document.getElementById('attendance').value;
-        const pesan      = document.getElementById('message').value.trim();
-        const kehadiran  = attendance === 'yes' ? 'Hadir' : 'Tidak Hadir';
+        const pesan     = document.getElementById('message').value.trim();
+        const kehadiran = attendance === 'yes' ? 'Hadir' : 'Tidak Hadir';
 
         if (!nama || !attendance) {
             alert('Mohon isi nama dan konfirmasi kehadiran.');
@@ -172,7 +189,6 @@ document.addEventListener("DOMContentLoaded", () => {
         submitBtn.disabled    = true;
 
         try {
-            // Kirim data ke Google Sheets (mode no-cors wajib untuk Apps Script)
             await fetch(APPS_SCRIPT_URL, {
                 method : 'POST',
                 mode   : 'no-cors',
@@ -181,8 +197,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             alert(`Terima kasih, ${nama}! 🎉\nKonfirmasi kehadiranmu sudah kami terima.`);
-
-            // Tunggu sebentar lalu reload pesan terbaru dari Sheets
             setTimeout(() => loadMessages(), 1500);
 
         } catch (err) {
@@ -193,7 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
             submitBtn.disabled    = false;
         }
 
-        // Reset form tapi pertahankan nama dari URL
         rsvpForm.reset();
         if (nameInput && namaParam) {
             nameInput.value = decodeURIComponent(namaParam);
@@ -201,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ============================================================
-    // 5. INTERSECTION OBSERVER (Animasi Scroll Fade In)
+    // 5. INTERSECTION OBSERVER (Animasi Scroll)
     // ============================================================
     const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
@@ -218,13 +231,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ============================================================
+// SCROLL KE SECTION (Global)
+// ============================================================
+window.scrollToSection = function(selector) {
+    const el = selector === 'header'
+        ? document.querySelector('header')
+        : document.querySelector(selector);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
+// ============================================================
 // COPY TO CLIPBOARD (Global)
 // ============================================================
-window.copyToClipboard = function (elementId) {
+window.copyToClipboard = function(elementId) {
     const textToCopy = document.getElementById(elementId).innerText;
     navigator.clipboard.writeText(textToCopy).then(() => {
         alert('Nomor rekening berhasil disalin! ✅');
-    }).catch(err => {
-        console.error('Gagal menyalin:', err);
-    });
+    }).catch(err => console.error('Gagal menyalin:', err));
 };

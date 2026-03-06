@@ -1,3 +1,0 @@
-ID PENERAPAN: AKfycbwSErQcerKTv4QWqkPwBzG8DQ1RvNMdoAu5-7kegQtb4ZRbNEXp4GU7xvhFUuTRtfJLsw
-
-URL:https://script.google.com/macros/s/AKfycbwSErQcerKTv4QWqkPwBzG8DQ1RvNMdoAu5-7kegQtb4ZRbNEXp4GU7xvhFUuTRtfJLsw/exec
