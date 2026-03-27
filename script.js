@@ -33,11 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btnOpen.addEventListener('click', () => {
         coverPage.classList.add('hidden');
         document.body.style.overflow = 'auto';
-
-        // Tampilkan floating nav
         floatingNav.classList.add('visible');
-
-        // Mainkan musik
         bgMusic.play().catch(err => {
             console.log("Autoplay ditahan browser:", err);
         });
@@ -52,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Sinkronisasi ikon dengan state musik
     bgMusic.addEventListener('play', () => {
         btnMusic.querySelector('.nav-icon').textContent = '⏸️';
         btnMusic.classList.add('playing');
@@ -66,16 +61,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ============================================================
-    // 2. GALLERY CAROUSEL
+    // 2. GALLERY CAROUSEL + AUTO SLIDE
     // ============================================================
-    const track     = document.querySelector('.carousel-track');
-    const slides    = Array.from(track.children);
+    const track      = document.querySelector('.carousel-track');
+    const slides     = Array.from(track.children);
     const nextButton = document.querySelector('.next-btn');
     const prevButton = document.querySelector('.prev-btn');
-    const dotsNav   = document.querySelector('.carousel-dots');
-    const dots      = Array.from(dotsNav.children);
+    const dotsNav    = document.querySelector('.carousel-dots');
+    const dots       = Array.from(dotsNav.children);
 
     let currentSlideIndex = 0;
+    let autoSlideTimer    = null;
+    const AUTO_SLIDE_DELAY = 3000; // Ganti angka (ms) untuk ubah kecepatan, 3000 = 3 detik
 
     const updateCarousel = (index) => {
         track.style.transform = `translateX(-${index * 100}%)`;
@@ -84,19 +81,55 @@ document.addEventListener("DOMContentLoaded", () => {
         currentSlideIndex = index;
     };
 
-    nextButton.addEventListener('click', () => {
+    const nextSlide = () => {
         let nextIndex = currentSlideIndex + 1;
         if (nextIndex >= slides.length) nextIndex = 0;
         updateCarousel(nextIndex);
+    };
+
+    // Mulai auto slide
+    const startAutoSlide = () => {
+        stopAutoSlide(); // Hindari duplikat timer
+        autoSlideTimer = setInterval(nextSlide, AUTO_SLIDE_DELAY);
+    };
+
+    // Hentikan auto slide
+    const stopAutoSlide = () => {
+        if (autoSlideTimer) {
+            clearInterval(autoSlideTimer);
+            autoSlideTimer = null;
+        }
+    };
+
+    // Klik next: geser manual, reset timer auto
+    nextButton.addEventListener('click', () => {
+        nextSlide();
+        startAutoSlide(); // Reset timer agar tidak langsung lompat lagi
     });
 
+    // Klik prev: geser manual, reset timer auto
     prevButton.addEventListener('click', () => {
         let prevIndex = currentSlideIndex - 1;
         if (prevIndex < 0) prevIndex = slides.length - 1;
         updateCarousel(prevIndex);
+        startAutoSlide();
     });
 
-    window.currentSlide = (index) => updateCarousel(index);
+    // Klik dot: geser manual, reset timer auto
+    window.currentSlide = (index) => {
+        updateCarousel(index);
+        startAutoSlide();
+    };
+
+    // Pause auto slide saat user hover/touch carousel
+    const carouselContainer = document.querySelector('.carousel-container');
+    carouselContainer.addEventListener('mouseenter', stopAutoSlide);
+    carouselContainer.addEventListener('mouseleave', startAutoSlide);
+    carouselContainer.addEventListener('touchstart', stopAutoSlide, { passive: true });
+    carouselContainer.addEventListener('touchend', startAutoSlide, { passive: true });
+
+    // Mulai auto slide saat halaman dibuka
+    startAutoSlide();
 
     // ============================================================
     // 3. COUNTDOWN TIMER
@@ -175,10 +208,10 @@ document.addEventListener("DOMContentLoaded", () => {
     rsvpForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const nama      = document.getElementById('name').value.trim();
+        const nama       = document.getElementById('name').value.trim();
         const attendance = document.getElementById('attendance').value;
-        const pesan     = document.getElementById('message').value.trim();
-        const kehadiran = attendance === 'yes' ? 'Hadir' : 'Tidak Hadir';
+        const pesan      = document.getElementById('message').value.trim();
+        const kehadiran  = attendance === 'yes' ? 'Hadir' : 'Tidak Hadir';
 
         if (!nama || !attendance) {
             alert('Mohon isi nama dan konfirmasi kehadiran.');
