@@ -559,6 +559,10 @@ h4 {
     color: var(--primary-color);
     margin-bottom: 3rem;
 }
+.story h3 {
+    font-size: 1rem;
+    color: var(--primary-color);
+}
 
 .timeline {
     position: relative;
@@ -884,6 +888,14 @@ h4 {
 
     h2 {
         font-size: 2rem;
+    }
+
+    .quote p {
+        font-size: 12px;
+    }
+
+    .hero {
+        min-height: 50vh;
     }
 
     /* Cover Page Mobile */
