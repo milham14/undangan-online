@@ -30,10 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const floatingNav = document.getElementById('floating-nav');
     const btnMusic    = document.getElementById('btn-music');
 
+    const envelopeFlap   = document.getElementById('envelope-flap');
+    const envelopeLetter = document.getElementById('envelope-letter');
+
     btnOpen.addEventListener('click', () => {
         coverPage.classList.add('hidden');
         document.body.style.overflow = 'auto';
         floatingNav.classList.add('visible');
+        
+        startParticles(); // Tetap jalankan kunang-kunang
+
         bgMusic.play().catch(err => {
             console.log("Autoplay ditahan browser:", err);
         });
@@ -279,6 +285,112 @@ window.scrollToSection = function(selector) {
 window.copyToClipboard = function(elementId) {
     const textToCopy = document.getElementById(elementId).innerText;
     navigator.clipboard.writeText(textToCopy).then(() => {
-        alert('Nomor rekening berhasil disalin! ✅');
+        alert('Teks berhasil disalin! ✅');
     }).catch(err => console.error('Gagal menyalin:', err));
 };
+
+// ============================================================
+// OPEN GIFT TAB (Global)
+// ============================================================
+window.openGiftTab = function(tabId) {
+    const giftContainer = document.getElementById('gift-card-content');
+    const tabCashless   = document.getElementById('tab-cashless');
+    const tabPhysical   = document.getElementById('tab-physical');
+    const btnCashless   = document.getElementById('tab-btn-cashless');
+    const btnPhysical   = document.getElementById('tab-btn-physical');
+    
+    // Cek apakah tab yang sedang aktif kembali diklik (matikan/toggle)
+    const activeBtn = document.getElementById('tab-btn-' + tabId);
+    if (activeBtn.classList.contains('active')) {
+        activeBtn.classList.remove('active');
+        giftContainer.style.display = 'none';
+        return; // Hentikan fungsi
+    }
+    
+    // Tampilkan container induk jika sebelumnya tersembunyi
+    giftContainer.style.display = 'block';
+
+    // Reset status aktif
+    tabCashless.style.display = 'none';
+    tabPhysical.style.display = 'none';
+    btnCashless.classList.remove('active');
+    btnPhysical.classList.remove('active');
+    
+    // Aktifkan tab yang dipilih
+    if (tabId === 'cashless') {
+        tabCashless.style.display = 'block';
+        btnCashless.classList.add('active');
+    } else {
+        tabPhysical.style.display = 'block';
+        btnPhysical.classList.add('active');
+    }
+};
+
+// ============================================================
+// 6. PARALLAX & PARTICLES LIGHT (Premium Upgrades)
+// ============================================================
+
+// Parallax Effect
+window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    
+    // Parallax hero content
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+        heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+    }
+
+    // Parallax watermark
+    document.querySelectorAll('.bg-watermark').forEach(watermark => {
+        const speed = watermark.getAttribute('data-speed') || 0.1;
+        // Watermark punya base -50% translateX, jadi kita tambahkan Y
+        watermark.style.transform = `translateX(-50%) translateY(${scrolled * speed}px)`;
+    });
+});
+
+// Particle Dust Generator
+let particleInterval = null;
+
+function startParticles() {
+    if (particleInterval) return;
+    
+    const container = document.body;
+    
+    particleInterval = setInterval(() => {
+        const particle = document.createElement('span');
+        particle.classList.add('particle-dust');
+        
+        // Ukuran partikel 3px - 8px
+        const size = Math.random() * 5 + 3;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Posisi X Start Acak
+        const posX = Math.random() * window.innerWidth;
+        particle.style.left = `${posX}px`;
+        
+        // Durasi melayang ke atas
+        const duration = Math.random() * 8 + 5;
+        particle.style.animationDuration = `${duration}s`;
+        
+        container.appendChild(particle);
+        
+        // Destroy node on end
+        setTimeout(() => {
+            particle.remove();
+        }, duration * 1000);
+        
+    }, 500); // Tiap setengah detik buat satu titik partikel
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+      clearInterval(particleInterval);
+      particleInterval = null;
+  } else {
+      const coverPage = document.getElementById('cover-page');
+      if (coverPage && coverPage.classList.contains('hidden')) {
+          startParticles();
+      }
+  }
+});

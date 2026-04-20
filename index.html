@@ -61,7 +61,8 @@
     </section>
 
     <!-- Bagian Mempelai (Couple) -->
-    <section class="couple section-fade">
+    <section class="couple section-fade" style="position: relative; overflow: hidden;">
+        <div class="bg-watermark" data-speed="0.2">Ilham & Erni</div>
         <h2>Mempelai</h2>
         <div class="couple-container">
             <!-- CPP (Calon Pengantin Pria) -->
@@ -101,18 +102,40 @@
                 <p class="date">Sabtu, 06 Maret 2026</p>
                 <p class="time">08:00 WIB - Selesai</p>
                 <p class="location">Masjid Agung Bekasi<br>Jl. Kenangan No. 1, Bekasi</p>
+                <div class="event-actions" style="margin-top: 1.5rem; display: flex; gap: 10px; justify-content: center;">
+                    <a href="https://maps.google.com" target="_blank" class="btn-action btn-maps">🗺️ Denah Lokasi</a>
+                </div>
             </div>
             <div class="event-card glass-card">
                 <h3>Resepsi</h3>
                 <p class="date">Sabtu, 06 Maret 2026</p>
                 <p class="time">11:00 WIB - 15:00 WIB</p>
                 <p class="location">Gedung Pertemuan Indah<br>Jl. Maju Bersama No. 10, Bekasi</p>
+                <div class="event-actions" style="margin-top: 1.5rem; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Resepsi+Pernikahan+Ilham+%26+Erni&dates=20260306T040000Z/20260306T080000Z" target="_blank" class="btn-action btn-calendar">📅 Save Date</a>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Bagian Location Map (Sesuai Desain Foto) -->
+    <section class="location-section section-fade" style="padding: 2rem 1rem;">
+        <div class="location-card">
+            <h2 class="location-title">Location</h2>
+            <div class="map-wrapper">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15958.824905206982!2d101.46411516045054!3d0.4287959996924823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d5a9d2b270a4a9%3A0x6bba843ffec6063!2sHotel%20Labersa!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="location-text">
+                <h3 style="font-weight: 700;">Grand Ballroom<br>Hotel Labersa</h3>
+                <p>Jl. Labersa, Tanah Merah, Kec. Siak Hulu,<br>Kab. Kampar, Riau</p>
+            </div>
+            <a href="https://maps.google.com" target="_blank" class="btn-darkred">Buka Google Maps</a>
+        </div>
+    </section>
+
     <!-- Bagian Our Story (Alur Pertemuan) -->
-    <section class="story section-fade">
+    <section class="story section-fade" style="position: relative; overflow: hidden;">
+        <div class="bg-watermark" data-speed="-0.15" style="top: 20%; color: var(--gold);">I & E</div>
         <h2>Our Story</h2>
         <div class="timeline">
             <div class="timeline-item left">
@@ -179,24 +202,50 @@
     </section>
 
     <!-- Bagian Wedding Gift (Amplop Digital / Bank) -->
-    <section class="gift section-fade">
-        <h2>Wedding Gift</h2>
-        <p>Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Anda bermaksud memberikan tanda kasih, Anda dapat mengirimkannya melalui:</p>
-        <div class="bank-cards">
-            <!-- Bank BCA -->
-            <div class="bank-card bca-card glass-card">
-                <img src="images/BCA.png" alt="Logo BCA" class="bank-logo">
-                <p class="account-number" id="norek-bca">0941384551</p>
-                <p class="account-name">a.n. Muhammad Ilham</p>
-                <button class="btn-copy" onclick="copyToClipboard('norek-bca')">Salin No. Rekening</button>
+    <section class="gift section-fade" style="padding-top: 2rem; text-align: center;">
+        <h2 class="title-gift-serif">Wedding Gift</h2>
+        <p style="font-size: 0.95rem; color: #333; margin: 0 auto 20px; max-width: 600px; line-height: 1.6;">
+            Your blessings mean the world to us.<br>
+            However, if giving is your way of expressing love, we would gratefully accept it, as it would add to our happiness.
+        </p>
+        
+        <div class="gift-tabs-container">
+            <button class="gift-tab-btn" id="tab-btn-cashless" onclick="openGiftTab('cashless')">Cashless</button>
+            <button class="gift-tab-btn" id="tab-btn-physical" onclick="openGiftTab('physical')">Wedding Gift</button>
+        </div>
+
+        <div class="gift-card-content" id="gift-card-content" style="display: none;">
+            <!-- Cashless Tab -->
+            <div id="tab-cashless" class="gift-content-pane" style="display: none;">
+                <div class="gift-account-row">
+                    <div class="gift-logo-container">
+                        <img src="images/BCA.png" alt="BCA">
+                    </div>
+                    <div class="gift-details">
+                        <p class="acc-number" id="norek-bca">12345678</p>
+                        <button class="btn-salin" onclick="copyToClipboard('norek-bca')">Salin Rekening</button>
+                        <p class="acc-name">BCA : Atas Nama<br>Rekening</p>
+                    </div>
+                </div>
+                
+                <div class="gift-account-row">
+                    <div class="gift-logo-container">
+                        <img src="images/BCA.png" alt="BNI">
+                    </div>
+                    <div class="gift-details">
+                        <p class="acc-number" id="norek-bni">12345678</p>
+                        <button class="btn-salin" onclick="copyToClipboard('norek-bni')">Salin Rekening</button>
+                        <p class="acc-name">BNI : Atas Nama</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- Bank Mandiri -->
-            <div class="bank-card mandiri-card glass-card">
-                <img src="images/BCA.png" alt="Logo BCA" class="bank-logo">
-                <p class="account-number" id="norek-mandiri">7635571951</p>
-                <p class="account-name">a.n. Erni Aryvia Damayanti</p>
-                <button class="btn-copy" onclick="copyToClipboard('norek-bca')">Salin No. Rekening</button>
+            <!-- Physical / Wedding Gift Tab -->
+            <div id="tab-physical" class="gift-content-pane" style="display: none; text-align: center;">
+                <h2 class="title-gift-serif">Kirim Hadiah</h2>
+                <p style="font-size: 0.9rem; color: #333; margin-bottom: 5px;">Anda dapat mengirim kado ke:</p>
+                <p id="alamat-kado" style="font-size: 0.9rem; color: #333; margin-bottom: 20px;">Jl. Wildan Sari 1 No 11 Banjarmasin<br>Barat 70119</p>
+                <button class="btn-darkred" style="padding: 8px 15px; border-radius: 5px; font-size: 0.9rem;" onclick="copyToClipboard('alamat-kado')">Salin Alamat</button>
             </div>
         </div>
     </section>
@@ -233,6 +282,18 @@
                 <!-- Pesan akan dimunculkan di sini via JS -->
             </div>
         </div>
+    </section>
+
+    <!-- Bagian Penutup / Terima Kasih -->
+    <section class="closing section-fade" style="text-align: center; padding: 4rem 1rem 3rem; position: relative; overflow: hidden;">
+        <div class="bg-watermark" data-speed="0.1" style="top: 40%; color: var(--gold);">Thank You</div>
+        <h2 class="title-gift-serif" style="margin-bottom: 20px;">Terima Kasih</h2>
+        <p style="font-size: 0.95rem; color: #333; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+            Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i sahabat sekalian berkenan hadir dan memberikan doa restu kepada kami.<br><br>
+            Atas kehadiran dan doa restunya, kami mengucapkan terima kasih yang sebesar-besarnya.<br><br>
+            Kami yang berbahagia,<br>
+            <strong style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: var(--primary-color); display: block; margin-top: 15px;">Ilham & Erni</strong>
+        </p>
     </section>
 
     <!-- Footer -->
@@ -289,6 +350,11 @@
     <button class="nav-btn" onclick="scrollToSection('.rsvp')" title="RSVP">
         <span class="nav-icon">✉️</span>
         <span class="nav-label">RSVP</span>
+    </button>
+
+    <button class="nav-btn" onclick="scrollToSection('.closing')" title="Terima Kasih">
+        <span class="nav-icon">🙏</span>
+        <span class="nav-label">Penutup</span>
     </button>
 
 </div>
