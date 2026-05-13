@@ -62,7 +62,7 @@ h4 {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(30, 41, 59, 0.9) 85%), url('images/_OSP1818.JPG') center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(30, 41, 59, 0.9) 85%), url('images/cover-bg.jpg') center/cover no-repeat;
     z-index: 9999;
     display: flex;
     flex-direction: column;
@@ -168,7 +168,7 @@ h4 {
     justify-content: center;
     text-align: center;
     /* Background romantis dengan overlay gelap */
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('images/_OSP1483.JPG') center/cover no-repeat fixed;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('images/hero-bg.jpg') center/cover no-repeat fixed;
     color: white;
     padding: 4rem 2rem;
 }
