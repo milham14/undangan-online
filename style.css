@@ -62,7 +62,7 @@ h4 {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(30, 41, 59, 0.9) 85%), url('images/prewed_1_1772683503431.png') center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(30, 41, 59, 0.9) 85%), url('images/_OSP1818.JPG') center/cover no-repeat;
     z-index: 9999;
     display: flex;
     flex-direction: column;
@@ -168,7 +168,7 @@ h4 {
     justify-content: center;
     text-align: center;
     /* Background romantis dengan overlay gelap */
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('images/_OSP1483.JPG') center/cover no-repeat fixed;
     color: white;
     padding: 4rem 2rem;
 }
@@ -266,6 +266,7 @@ h4 {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center top;
 }
 
 .couple-card h3 {
@@ -559,6 +560,7 @@ h4 {
     color: var(--primary-color);
     margin-bottom: 3rem;
 }
+
 .story h3 {
     font-size: 1rem;
     color: var(--primary-color);
@@ -646,7 +648,7 @@ h4 {
 /* --- Galeri (Image Carousel) --- */
 .carousel-container {
     position: relative;
-    max-width: 800px;
+    max-width: 400px;
     margin: 0 auto;
     overflow: hidden;
     border-radius: 12px;
@@ -667,8 +669,9 @@ h4 {
 
 .carousel-slide img {
     width: 100%;
-    height: 500px;
+    height: 400px;
     object-fit: cover;
+    object-position: center;
     display: block;
     border-radius: 150px 150px 0 0;
 }
@@ -868,6 +871,17 @@ h4 {
     }
 }
 
+/* Penyesuaian Desktop (Laptop / PC) untuk Cover Image */
+@media (min-width: 769px) {
+    .cover-page.new-cover {
+        background-position: center 15%;
+    }
+
+    .hero {
+        background-position: center 20%;
+    }
+}
+
 /* Tampilan Responsif (Mobile / Handphone) */
 @media (max-width: 768px) {
 
@@ -984,13 +998,13 @@ h4 {
         left: 0 !important;
     }
 
-    .timeline-item.left, 
+    .timeline-item.left,
     .timeline-item.right {
         left: 0;
     }
 
     /* Bulatan connector di sebelah kiri */
-    .timeline-item.left::after, 
+    .timeline-item.left::after,
     .timeline-item.right::after {
         left: 10px;
         right: unset;
@@ -1086,19 +1100,21 @@ h4 {
     .countdown {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .timeline::after {
-        left: 15px; 
+        left: 15px;
     }
-    .timeline-item.left::after, 
+
+    .timeline-item.left::after,
     .timeline-item.right::after {
         left: 5px;
     }
+
     .timeline-item {
         padding-left: 40px !important;
         padding-right: 10px !important;
     }
-    
+
     .bank-card {
         padding: 1.5rem;
     }
@@ -1302,22 +1318,26 @@ h4 {
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
+
 .btn-maps {
     background: white;
     color: var(--primary-color);
     border: 1px solid var(--primary-color);
 }
+
 .btn-maps:hover {
     background: var(--primary-color);
     color: white;
 }
+
 .btn-calendar {
     background: var(--primary-color);
     color: white;
     border: 1px solid var(--primary-color);
 }
+
 .btn-calendar:hover {
     background: #76854d;
     color: white;
@@ -1334,17 +1354,21 @@ h4 {
     z-index: 8000;
     animation: floatUp 8s linear infinite;
 }
+
 @keyframes floatUp {
     0% {
         transform: translateY(0) scale(1);
         opacity: 0;
     }
+
     20% {
         opacity: 0.6;
     }
+
     80% {
         opacity: 0.6;
     }
+
     100% {
         transform: translateY(-100vh) scale(0.5);
         opacity: 0;
@@ -1354,7 +1378,7 @@ h4 {
 /* ============================================================
    GIFT TABS & LOCATION RE-DESIGN
    ============================================================ */
-   
+
 .gift-tabs-container {
     display: flex;
     justify-content: center;
@@ -1387,7 +1411,7 @@ h4 {
     background: rgba(245, 237, 235, 0.7);
     margin: 0 auto;
     max-width: 400px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .gift-account-row {
@@ -1408,7 +1432,7 @@ h4 {
     background: white;
     padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .gift-logo-container img {
@@ -1469,7 +1493,7 @@ h4 {
     margin: 0 auto;
     max-width: 450px;
     text-align: center;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
 .location-title {
