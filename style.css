@@ -61,7 +61,8 @@ h4 {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100vh; /* Fallback for older browsers */
+    height: 100dvh; /* Dynamic viewport for mobile address bars */
     background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(30, 41, 59, 0.9) 85%), url('images/cover-bg.jpg') center/cover no-repeat;
     z-index: 9999;
     display: flex;
@@ -102,7 +103,7 @@ h4 {
 }
 
 .cover-bottom-area {
-    padding-bottom: 3rem;
+    padding-bottom: max(3rem, calc(2rem + env(safe-area-inset-bottom)));
     width: 100%;
     animation: fadeInDown 1.5s ease 0.5s backwards;
 }
@@ -162,7 +163,8 @@ h4 {
 
 /* --- Hero Section (Cover) --- */
 .hero {
-    min-height: 100vh;
+    min-height: 100vh; /* Fallback */
+    min-height: 100dvh; /* Dynamic viewport */
     display: flex;
     align-items: center;
     justify-content: center;
